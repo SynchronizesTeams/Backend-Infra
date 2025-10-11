@@ -27,7 +27,11 @@ func Register(c *fiber.Ctx) error {
 		return c.Status(500).JSON(fiber.Map{"error": "cannot create user"})
 	}
 
-	return c.JSON(fiber.Map{"message": "user created"})
+	return c.JSON(fiber.Map{
+		"message": "user created",
+		"user": user,
+	})
+
 }
 
 // Login
