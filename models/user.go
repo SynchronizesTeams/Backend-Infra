@@ -1,6 +1,9 @@
 package models
 
-import "gorm.io/gorm"
+import (
+	"gorm.io/gorm"
+	"go-api-infra/dto"
+)
 
 type User struct {
 	gorm.Model
@@ -15,6 +18,15 @@ type User struct {
 	Jabatan				string `json:"jabatan"`
 	TahunAjaranMulai	string `gorm:"type:year" json:"tahun_ajaran_mulai"`
 
-	UserLinks 			[]UserLinks `gorm:"foreignKey:UserID" json:"user_links"`
-	News 				[]News `gorm:"foreignKey:AuthorID" json:"news"`
+	UserLinks 			[]UserLinks 	`gorm:"foreignKey:UserID" json:"user_links"`
+	News 				[]News 			`gorm:"foreignKey:AuthorID" json:"news"`
+	Post 				[]ForumPost 	`gorm:"foreignKey:UserID"`
+	Replies 			[]ForumReply 	`gorm:"foreignKey:UserID"`
+}
+
+func (u *User) ToDTO() dto.UserDTO {
+	return dto.UserDTO{
+		ID: u.ID,
+		Name: u.Name,
+	}
 }

@@ -3,33 +3,20 @@ package handlers
 import (
 	"fmt"
 	"go-api-infra/database"
+	"go-api-infra/helpers"
 	"go-api-infra/models"
+
 	// "strconv"
 	"strings"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/golang-jwt/jwt/v4"
+
 	// "gorm.io/gorm"
 	"os"
 )
 
-func slugify(s string) string {
-	// Ubah huruf besar → kecil
-	s = strings.ToLower(s)
-	// Ganti spasi & karakter aneh jadi tanda "-"
-	s = strings.ReplaceAll(s, " ", "-")
-	// Hapus karakter non-alfanumerik selain "-"
-	s = strings.Map(func(r rune) rune {
-		if (r >= 'a' && r <= 'z') ||
-			(r >= '0' && r <= '9') ||
-			r == '-' {
-			return r
-		}
-		return -1
-	}, s)
-	return s
-}
 
 func CreateNews(c *fiber.Ctx) error {
 	userData := c.Locals("user")
@@ -54,7 +41,7 @@ func CreateNews(c *fiber.Ctx) error {
 	excerpt := c.FormValue("excerpt")
 	status := c.FormValue("status")
 	rawTags := c.FormValue("tags")
-	slug := slugify(title)
+	slug := helpers.Slugify(title)
 
 	file, err := c.FormFile("thumbnail")
 	if err != nil {
@@ -140,7 +127,7 @@ func UpdateNews(c *fiber.Ctx) error {
 	// Update kolom text
 	if title != "" {
 		news.Title = title
-		news.Slug = slugify(title)
+		news.Slug = helpers.Slugify(title)
 	}
 	if content != "" {
 		news.Content = content
