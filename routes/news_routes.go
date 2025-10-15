@@ -1,8 +1,10 @@
 package routes
 
 import (
-	"github.com/gofiber/fiber/v2"
 	"go-api-infra/handlers"
+	"os"
+
+	"github.com/gofiber/fiber/v2"
 	jwtware "github.com/gofiber/jwt/v3"
 )
 
@@ -10,7 +12,7 @@ func NewsRoutes(router fiber.Router) {
 	news := router.Group("/news")
 
 	news.Use(jwtware.New(jwtware.Config{
-		SigningKey: handlers.SecretKey,
+		SigningKey: []byte(os.Getenv("JWT_SECRET")),
 	}))
 
 	news.Post("/create", handlers.CreateNews)

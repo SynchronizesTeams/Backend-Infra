@@ -1,16 +1,14 @@
 package handlers
 
 import (
+	"go-api-infra/config"
 	"go-api-infra/database"
 	"go-api-infra/models"
-	"time"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/golang-jwt/jwt/v4"
 	"golang.org/x/crypto/bcrypt"
 )
-
-var SecretKey = []byte("mysecretkey")
 
 // Register user baru
 func Register(c *fiber.Ctx) error {
@@ -51,21 +49,15 @@ func Login(c *fiber.Ctx) error {
 		return c.Status(400).JSON(fiber.Map{"error": "wrong password"})
 	}
 
-	// Generate JWT token
-	claims := jwt.MapClaims{
-		"id":    user.ID,
-		"email": user.Email,
-		"exp":   time.Now().Add(time.Hour * 24).Unix(),
-	}
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	t, err := token.SignedString(SecretKey)
+	// Generate JWT token (pindah ke helper di config/jwt.go)
+	token, err := config.GenerateJWT(user.ID, user.Email)
 	if err != nil {
 		return c.SendStatus(500)
 	}
 
 	return c.JSON(fiber.Map{
-		"user":  user,	
-		"token": t,
+		"user":  user,
+		"token": token,
 	})
 }
 

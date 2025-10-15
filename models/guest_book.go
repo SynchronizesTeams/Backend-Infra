@@ -17,6 +17,7 @@ type GuestBook struct {
 	ProposedDate time.Time 	`json:"proposed_date" gorm:"type:date"`
 	Status string `json:"status" gorm:"type:enum('pending','approved','rejected','hidden');default:'pending'"`
 	RejectionReason string `json:"rejection_reason" gorm:"type:text"`
-	ApprovedAt time.Time 	`json:"approved_at_calendar"`
+	ApprovedAt time.Time 	`json:"approved_at"`
 	RequestDate time.Time 	`json:"request_date" gorm:"type:date"`
+	ShowInCalendar 	bool `json:"show_in_calendar"`
 }

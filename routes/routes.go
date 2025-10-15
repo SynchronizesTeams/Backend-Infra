@@ -14,4 +14,5 @@ func SetupRoutes(app *fiber.App) {
 	ForumSectionRoutes(api)
 	ForumPostRoutes(api)
 	EventRouter(api)
+	GuestBookRoutes(api)
 }

@@ -2,6 +2,7 @@ package routes
 
 import (
 	"go-api-infra/handlers"
+	"os"
 
 	"github.com/gofiber/fiber/v2"
 	jwtware "github.com/gofiber/jwt/v3"
@@ -10,7 +11,7 @@ import (
 func ForumPostRoutes(router fiber.Router) {
 	post := router.Group("/forum-post")
 	post.Use(jwtware.New(jwtware.Config{
-		SigningKey: handlers.SecretKey,
+		SigningKey: []byte(os.Getenv("JWT_SECRET")),
 	}))
 
 	post.Post("/create", handlers.CreatePost)

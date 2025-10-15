@@ -4,11 +4,17 @@ import (
 	"go-api-infra/database"
 	"go-api-infra/models"
 	"go-api-infra/routes"
+	"log"
+
+	"github.com/joho/godotenv"
 
 	"github.com/gofiber/fiber/v2"
 )
 
 func main() {
+	if err := godotenv.Load(); err != nil {
+		log.Println("⚠️  .env file not found, using system env")
+	}
 	// 1️⃣ Connect Database
 	database.Connect()
 
@@ -22,6 +28,7 @@ func main() {
 		&models.ForumReply{},
 		&models.ForumSection{},
 		&models.Event{},
+		&models.GuestBook{},
 	)
 
 	// 3️⃣ Init Fiber
