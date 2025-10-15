@@ -2,6 +2,7 @@ package database
 
 import (
 	"fmt"
+	"log"
 	"os"
 
 	"gorm.io/driver/mysql"
@@ -16,14 +17,17 @@ func Connect() {
 	dbName := os.Getenv("DB_NAME")
 	dbSocket := os.Getenv("DB_SOCKET")
 
-	// Format DSN menggunakan unix socket
+	fmt.Println("Connecting to database...")
+	fmt.Println("DB_SOCKET =", dbSocket)
+
 	dsn := fmt.Sprintf("%s:%s@unix(%s)/%s?charset=utf8mb4&parseTime=True&loc=Local",
 		dbUser, dbPass, dbSocket, dbName)
 
-	database, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
-		panic("Failed to connect database")
+		log.Fatalf("❌ Failed to connect database: %v", err)
 	}
 
-	DB = database
+	DB = db
+	log.Println("✅ Database connected successfully")
 }

@@ -41,5 +41,8 @@ func main() {
 	routes.SetupRoutes(app)
 
 	// 6️⃣ Start Server
-	app.Listen(":3000")
+	if err := app.Listen("0.0.0.0:3000"); err != nil {
+		log.Fatalf("❌ Failed to start Fiber server: %v", err)
+	}
+
 }
