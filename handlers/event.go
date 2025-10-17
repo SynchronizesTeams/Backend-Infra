@@ -137,6 +137,21 @@ func GetEvent(c *fiber.Ctx) error {
 	return c.Status(200).JSON(response)
 }
 
+func GetEventByDate(c *fiber.Ctx) error {
+	date := c.Params("date")
+	var event models.Event
+
+	if err := database.DB.Where("start_date = ?", date).Find(&event).Error; err != nil {
+		return c.Status(500).JSON(fiber.Map{
+			"error": "cannot find event",
+		})
+	}
+
+	var response = mapper.EventToDTO(event)
+
+	return c.Status(200).JSON(response)
+}
+
 func GetAllEvent(c *fiber.Ctx) error {
 	var event []models.Event
 

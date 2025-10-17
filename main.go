@@ -1,13 +1,15 @@
 package main
 
 import (
+	"fmt"
 	"go-api-infra/database"
 	"go-api-infra/models"
 	"go-api-infra/routes"
 	"log"
+	"os"
 
 	"github.com/joho/godotenv"
-
+	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -29,19 +31,41 @@ func main() {
 		&models.ForumSection{},
 		&models.Event{},
 		&models.GuestBook{},
+		&models.Mading{},
+		&models.Teacher{},
+		&models.Eskul{},
+		&models.Achievement{},
+		&models.Portal{},
+		&models.Industry{},
+		&models.Certification{},
+		&models.Testimonial{},
 	)
 
 	// 3️⃣ Init Fiber
 	app := fiber.New()
+	app.Use(cors.New(cors.Config{
+		AllowOrigins:     "http://localhost:3000", 
+		AllowMethods:     "GET,POST,PUT,DELETE,OPTIONS",
+		AllowHeaders:     "Origin, Content-Type, Accept, Authorization",
+		AllowCredentials: true,
+	}))
+
 
 	// 4️⃣ Serve static uploads
 	app.Static("/uploads", "./uploads")
 
 	// 5️⃣ Setup API Routes
 	routes.SetupRoutes(app)
+	port := os.Getenv("APP_PORT")
+	if port == "" {
+		port = "3000" // fallback kalau .env kosong
+	}
 
 	// 6️⃣ Start Server
-	if err := app.Listen("0.0.0.0:3000"); err != nil {
+	addr := fmt.Sprintf("0.0.0.0:%s", port)
+	log.Printf("🚀 Server running on %s\n", addr)
+
+	if err := app.Listen(addr); err != nil {
 		log.Fatalf("❌ Failed to start Fiber server: %v", err)
 	}
 

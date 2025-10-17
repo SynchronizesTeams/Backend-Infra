@@ -46,10 +46,10 @@ func UpdateEventFromDTO(event *models.Event, dto dto.EventRequest) {
 	if dto.Organizer != "" {
 		event.Organizer = dto.Organizer
 	}
-	if !dto.StartDate.IsZero() {
+	if dto.StartDate != "" {
 		event.StartDate = dto.StartDate
 	}
-	if !dto.EndDate.IsZero() {
+	if dto.EndDate != "" {
 		event.EndDate = dto.EndDate
 	}
 	event.UpdatedAt = time.Now()

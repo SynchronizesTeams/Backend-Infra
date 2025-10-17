@@ -3,6 +3,9 @@ package handlers
 import (
 	"go-api-infra/config"
 	"go-api-infra/database"
+	"go-api-infra/dto"
+	"go-api-infra/helpers"
+	"go-api-infra/mapper"
 	"go-api-infra/models"
 
 	"github.com/gofiber/fiber/v2"
@@ -63,11 +66,103 @@ func Login(c *fiber.Ctx) error {
 
 // Protected route
 func Profile(c *fiber.Ctx) error {
-	user := c.Locals("user").(*jwt.Token)
-	claims := user.Claims.(jwt.MapClaims)
+	var user models.User
+	userData := c.Locals("user")
+	if userData == nil {
+		return c.Status(401).JSON(fiber.Map{"error": "Unauthorized"})
+	}
 
-	return c.JSON(fiber.Map{
-		"user_id": claims["id"],
-		"email":   claims["email"],
-	})
+	userToken, ok := userData.(*jwt.Token)
+	if !ok {
+		return c.Status(401).JSON(fiber.Map{"error": "Invalid token"})
+	}
+
+	claims := userToken.Claims.(jwt.MapClaims)
+	idVal, ok := claims["id"].(float64)
+	if !ok {
+		return c.Status(400).JSON(fiber.Map{"error": "Invalid ID in token"})
+	}
+	UserID := uint(idVal)
+
+	if err := database.DB.First(&user, UserID).Error; err != nil {
+		return c.Status(500).JSON(fiber.Map{
+			"error": "failed to fetch",
+		})
+	}
+
+	var response = mapper.UserToDTO(user)
+
+	return c.Status(200).JSON(response)
+}
+
+func EditProfile(c *fiber.Ctx) error {
+	var user models.User
+	userData := c.Locals("user")
+	if userData == nil {
+		return c.Status(401).JSON(fiber.Map{"error": "Unauthorized"})
+	}
+
+	userToken, ok := userData.(*jwt.Token)
+	if !ok {
+		return c.Status(401).JSON(fiber.Map{"error": "Invalid token"})
+	}
+
+	claims := userToken.Claims.(jwt.MapClaims)
+	idVal, ok := claims["id"].(float64)
+	if !ok {
+		return c.Status(400).JSON(fiber.Map{"error": "Invalid ID in token"})
+	}
+	UserID := uint(idVal)
+
+	if err := database.DB.First(&user, UserID).Error; err != nil {
+		return c.Status(500).JSON(fiber.Map{
+			"error": "cannot find user",
+		})
+	}
+
+	var input dto.UserRequest
+	if err := c.BodyParser(&input); err != nil {
+		return c.Status(500).JSON(fiber.Map{
+			"error": "invalid form data",
+		})
+	}
+
+	file, _ := c.FormFile("photo_url")
+	if file != nil {
+		path, err := helpers.SaveUpdatedFile(c, file, "uploads/user", user.PhotoUrl)
+		if err != nil {
+			return c.Status(500).JSON(fiber.Map{
+				"error": "failed to update image",
+			})
+		}
+		user.PhotoUrl = path
+	}
+
+	mapper.UpdateUser(&user, input)
+
+	if err := database.DB.Save(&user).Error; err != nil {
+		return c.Status(500).JSON(fiber.Map{
+			"error": "failed to save user",
+		})
+	}
+
+	var response = mapper.UserToDTO(user)
+
+	return c.Status(200).JSON(response)
+}
+
+func ProfilePublic(c *fiber.Ctx) error {
+	var user models.User
+
+	id := c.Params("id")
+
+	if err := database.DB.First(&user, id).Error; err != nil {
+		return c.Status(500).JSON(fiber.Map{
+			"error": "failed to fetch",
+		})
+	}
+
+	var response = mapper.UserToDTO(user)
+
+	return c.Status(200).JSON(response)
 }

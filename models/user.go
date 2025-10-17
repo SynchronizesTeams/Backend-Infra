@@ -22,6 +22,7 @@ type User struct {
 	News 				[]News 			`gorm:"foreignKey:AuthorID" json:"news"`
 	Post 				[]ForumPost 	`gorm:"foreignKey:UserID"`
 	Replies 			[]ForumReply 	`gorm:"foreignKey:UserID"`
+	Teacher				[]Teacher		`gorm:"foreignKey:UserID"`
 }
 
 func (u *User) ToDTO() dto.UserDTO {

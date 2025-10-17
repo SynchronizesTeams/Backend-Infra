@@ -18,4 +18,5 @@ func AuthRoutes(router fiber.Router) {
 		SigningKey: []byte(os.Getenv("JWT_SECRET")),
 	}))
 	auth.Get("/profile", handlers.Profile)
+	auth.Post("/edit", handlers.EditProfile)
 }

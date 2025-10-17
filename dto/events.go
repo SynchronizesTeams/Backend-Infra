@@ -3,13 +3,13 @@ package dto
 import "time"
 
 type EventRequest struct {
-	Title 		string 		`json:"title"`
-	Description string 		`json:"description" gorm:"type:text"`
-	Category 	string 		`json:"category"`
-	StartDate 	time.Time 	`json:"start_date"`
-	EndDate 	time.Time 	`json:"end_date"`
-	Location 	string 		`json:"location"`
-	Organizer 	string 		`json:"organizer"`
+	Title 		string 		`form:"title"`
+	Description string 		`form:"description" gorm:"type:text"`
+	Category 	string 		`form:"category"`
+	StartDate 	string 		`form:"start_date"`
+	EndDate 	string 		`form:"end_date"`
+	Location 	string 		`form:"location"`
+	Organizer 	string 		`form:"organizer"`
 }
 
 type EventResponse struct {
@@ -18,8 +18,8 @@ type EventResponse struct {
 	Description string 		`json:"description" `
 	Category 	string 		`json:"category"`
 	Visibility 	string 		`json:"visibility"`
-	StartDate 	time.Time 	`json:"start_date"`
-	EndDate 	time.Time 	`json:"end_date"`
+	StartDate 	string 		`json:"start_date"`
+	EndDate 	string 		`json:"end_date"`
 	Location 	string 		`json:"location"`
 	Organizer 	string 		`json:"organizer"`
 	Image		string 		`json:"image"`

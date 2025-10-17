@@ -96,7 +96,7 @@ func EditLinks(c *fiber.Ctx) error {
 	}
 
 	file, err := c.FormFile("icon")
-	if err == nil && file == nil {
+	if err == nil && file != nil {
 		filename := fmt.Sprintf("%d_%s",time.Now().Unix(), file.Filename)
 		path := fmt.Sprintf("uploads/user_links/%s", filename)
 
@@ -206,3 +206,32 @@ func DeleteLinks(c *fiber.Ctx) error {
 	})
 }
 
+func ShowUserLinks(c *fiber.Ctx) error {
+	id := c.Params("id")
+
+	var user_links []models.UserLinks
+
+	if err := database.DB.Where("user_id = ?", id).Find(&user_links).Error; err != nil {
+		return c.Status(500).JSON(fiber.Map{
+			"error": "failed to fectch user links",
+		})
+	}
+
+	if len(user_links) == 0 {
+		return c.Status(404).JSON(fiber.Map{
+			"error": "cannot find link for this user",
+		})
+	}
+
+	var response []dto.UserLinksResponse
+	for _, link := range user_links {
+		response = append(response, dto.UserLinksResponse{
+			ID: link.ID,
+			Title: link.Title,
+			Url: link.Url,
+			Icon: link.Icon,
+		})
+	}
+
+	return c.Status(200).JSON(response)
+}

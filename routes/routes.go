@@ -15,4 +15,18 @@ func SetupRoutes(app *fiber.App) {
 	ForumPostRoutes(api)
 	EventRouter(api)
 	GuestBookRoutes(api)
+	MadingRoutes(api)
+	TeacherRoutes(api)
+	EskulRoutes(api)
+	AchievementRoutes(api)
+	PortalRoutes(api)
+	IndustryRoutes(api)
+	CertificationRoutes(api)
+	TestimonialRoutes(api)
+	PublicRoutes(api)
+
+	app.Get("/ping", func(c *fiber.Ctx) error {
+	return c.SendString("pong")
+	})
+
 }
