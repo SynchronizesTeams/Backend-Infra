@@ -3,6 +3,7 @@ package handlers
 import (
 	"go-api-infra/database"
 	"go-api-infra/dto"
+	"go-api-infra/helpers"
 	"go-api-infra/mapper"
 	"go-api-infra/models"
 	"os"
@@ -39,12 +40,18 @@ func CreateTeacher(c *fiber.Ctx) error {
 		})
 	}
 
+	filePath, err := helpers.SaveUploadedFile(c, "photo", "uploads/teachers")
+	if err != nil {
+		filePath = ""
+	}
+
 	teacher := models.Teacher{
 		NIG: input.NIG,
 		FullName: input.FullName,
 		Position: input.Position,
 		Subject: input.Subject,
 		Description: input.Description,
+		Photo: filePath,
 		UserID: userID,
 	}
 
@@ -65,28 +72,42 @@ func EditTeacher(c *fiber.Ctx) error {
 	id := c.Params("id")
 	var teacher models.Teacher
 
-	if err := database.DB.First(&teacher, id).Error; err != nil {
+	if err := database.DB.Preload("User").First(&teacher, id).Error; err != nil {
 		return c.Status(500).JSON(fiber.Map{
 			"error": "failed to fetch",
 		})
 	}
 
 	var input dto.TeacherRequest
-
 	if err := c.BodyParser(&input); err != nil {
 		return c.Status(500).JSON(fiber.Map{
 			"error": "invalid form data",
 		})
 	}
 
-	database.DB.Preload("User").First(&teacher, teacher.ID)
+	file, _ := c.FormFile("photo")
+	if file != nil {
+		path, err := helpers.SaveUpdatedFile(c, file, "uploads/teachers", teacher.Photo)
+		if err != nil {
+			return c.Status(500).JSON(fiber.Map{
+				"error": "failed to update photo",
+			})
+		}
+		teacher.Photo = path
+	}
 
 	mapper.UpdateTeacherFromDTO(&teacher, input)
 
-	response := mapper.TeacherToDTO(teacher)
+	// Simpan perubahan
+	if err := database.DB.Save(&teacher).Error; err != nil {
+		return c.Status(500).JSON(fiber.Map{
+			"error": "failed to save changes",
+		})
+	}
 
+	response := mapper.TeacherToDTO(teacher)
 	return c.Status(200).JSON(response)
-} 
+}
 
 
 func DeleteTeacher(c *fiber.Ctx) error {

@@ -14,6 +14,7 @@ func TeacherToDTO(t models.Teacher) dto.TeacherResponse {
 		Position: t.Position,
 		Subject: t.Subject,
 		Description: t.Description,
+		Photo: t.Photo,
 		User: dto.UserTeacherResponse{
 			ID: t.User.ID,
 			Name: t.User.Name,
