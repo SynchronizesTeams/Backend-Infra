@@ -18,5 +18,6 @@ func MadingRoutes(router fiber.Router) {
 	mading.Post("/edit/:id", handlers.EditMading)
 	mading.Get("/show/:id", handlers.ShowMading)
 	mading.Get("/showAll", handlers.ShowAllMadings)
-	// mading.Delete("/delete/:id", handlers.D)
+	mading.Delete("/delete/:id", handlers.DeleteMading)
+	mading.Put("change-status/:id", handlers.ChangeStatusMading)
 }

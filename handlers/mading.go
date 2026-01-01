@@ -6,6 +6,7 @@ import (
 	"go-api-infra/helpers"
 	"go-api-infra/mapper"
 	"go-api-infra/models"
+	"os"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -109,6 +110,61 @@ func ShowAllMadings(c *fiber.Ctx) error {
 	}
 
 	response := mapper.MadingListToDTO(madings)
+
+	return c.Status(200).JSON(response)
+}
+
+func DeleteMading(c *fiber.Ctx) error {
+	id := c.Params("id")
+	var mading models.Mading
+
+	if err := database.DB.First(&mading, id).Error; err != nil {
+		return c.Status(500).JSON(fiber.Map{
+			"error": "failed to fetch mading",
+		})
+	}
+
+	if err := os.Remove(mading.Image); err != nil {
+		if !os.IsNotExist(err) {
+			return c.Status(500).JSON(fiber.Map{
+				"error": "failed to delete image",
+			})
+		}
+	}
+
+	if err := database.DB.Delete(&mading).Error; err != nil {
+		return c.Status(500).JSON(fiber.Map{
+			"error": "failed to delete mading",
+		})
+	}
+
+	return c.Status(200).JSON(fiber.Map{
+		"message": "mading deleted successfully",
+	})
+}
+
+
+func ChangeStatusMading(c *fiber.Ctx) error {
+	id := c.Params("id")
+	status := c.FormValue("status")
+	
+	var mading models.Mading
+
+	if err := database.DB.First(&mading, id).Error; err != nil {
+		return c.Status(500).JSON(fiber.Map{
+			"error": "failed to fetch mading",
+		})
+	}
+
+	mading.Status = status
+
+	if err := database.DB.Save(&mading).Error; err != nil {
+		return c.Status(500).JSON(fiber.Map{
+			"error": "failed to update status",
+		})
+	}
+
+	response := mapper.MadingToDTO(mading)
 
 	return c.Status(200).JSON(response)
 }

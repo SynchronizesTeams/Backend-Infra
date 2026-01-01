@@ -29,3 +29,14 @@ type UserResponse struct {
 	Jabatan				string 	`json:"jabatan"`
 	TahunAjaranMulai	string 	`json:"tahun_ajaran_mulai"`
 }
+
+type RegisterRequest struct {
+	Name     string `json:"name"`
+	Email    string `json:"email"`
+	Password string `json:"password"`
+}
+
+type LoginRequest struct {
+    Email    string `json:"email"`
+    Password string `json:"password"`
+}

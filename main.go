@@ -7,7 +7,7 @@ import (
 	"go-api-infra/routes"
 	"log"
 	"os"
-	"strings"
+	// "strings"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
@@ -44,16 +44,17 @@ func main() {
 
 	// 3️⃣ Init Fiber
 	app := fiber.New()
-	allowedOrigins := []string{
-		"https://infra-adeli.synchronizeteams.my.id",
-		"https://smkpluspelitanusantara.sch.id",
-		"http://localhost:3000",
-	}
+	// allowedOrigins := []string{
+	// 	"https://infra-adeli.synchronizeteams.my.id",
+	// 	"https://smkpluspelitanusantara.sch.id",
+	// 	"http://localhost:3000",
+	// 	"http://127.0.0.1:3000",
+	// 	"https://infra.synchronizeteams.my.id/api",
+	// }
 	app.Use(cors.New(cors.Config{
-		AllowOrigins:     strings.Join(allowedOrigins, ","), 
-		AllowMethods:     "GET,POST,PUT,DELETE,OPTIONS",
-		AllowHeaders:     "Origin, Content-Type, Accept, Authorization",
-		AllowCredentials: true,
+		AllowOrigins: "*",
+		AllowMethods: "GET,POST,PUT,DELETE,OPTIONS",
+		AllowHeaders: "Origin, Content-Type, Accept, Authorization",
 	}))
 
 

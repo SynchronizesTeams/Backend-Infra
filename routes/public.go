@@ -24,10 +24,11 @@ func PublicRoutes(router fiber.Router) {
 	achieve := public.Group("/achievement")
 	user := public.Group("/user")
 	user_links := public.Group("/user-link")
-	testi := public.Group("/testi")
+	testi := public.Group("/testimonial")
 	industry := public.Group("/industry")
 	cert := public.Group("/certification")
 	portal := public.Group("/portal")
+	section := public.Group("/forum-section")
 
 	//Achievement
 	achieve.Get("/show/:id", handlers.ShowAchievement)
@@ -47,6 +48,7 @@ func PublicRoutes(router fiber.Router) {
 	event.Get("/show/date/:date", handlers.GetEventByDate)
 
 	//Guest
+	guest.Post("/create", handlers.CreateGuest)
 	guest.Get("/showAll", handlers.GetAllGuestBook)
 	guest.Get("/show/:id", handlers.GetGuestBook)
 
@@ -75,12 +77,15 @@ func PublicRoutes(router fiber.Router) {
 	teacher.Get("/show/:id", handlers.ShowTeacher)
 
 	// testimonial
-	testi.Get("/show/:id", handlers.ShowTestimonial)
 	testi.Get("/showAll", handlers.ShowAllTestimonial)
+	testi.Get("/show/:id", handlers.ShowTestimonial)
 
 	//user links
 	user_links.Get("/show/:id", handlers.ShowUserLinks)
 
+	// forum
+	section.Get("/showAll", handlers.ShowAllSection)
+	
 	//User Profile
 	user.Get("profile/:id", handlers.ProfilePublic)
 }

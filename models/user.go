@@ -16,7 +16,7 @@ type User struct {
 	Phone 				string `json:"phone"`
 	Alamat 				string `json:"alamat" gorm:"type:text"`
 	Jabatan				string `json:"jabatan"`
-	TahunAjaranMulai	string `gorm:"type:year" json:"tahun_ajaran_mulai"`
+	TahunAjaranMulai	string `gorm:"type:year;default:null" json:"tahun_ajaran_mulai"`
 
 	UserLinks 			[]UserLinks 	`gorm:"foreignKey:UserID" json:"user_links"`
 	News 				[]News 			`gorm:"foreignKey:AuthorID" json:"news"`

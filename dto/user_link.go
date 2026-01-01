@@ -11,5 +11,13 @@ type UserLinksResponse struct {
 	Title	string 	`json:"title"`
 	Url 	string 	`json:"url"`
 	Icon 	string 	`json:"icon"`
+	User 	UserLinksWithUserResponse `json:"user"`
 }
 
+type UserLinksWithUserResponse struct {
+	ID 					uint	`json:"id"`
+	Name     			string 	`json:"name"`
+	Email    			string 	`json:"email"`
+	PhotoUrl 			string 	`json:"photo_url"`
+	Jabatan				string 	`json:"jabatan"`
+}

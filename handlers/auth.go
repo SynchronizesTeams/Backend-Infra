@@ -15,53 +15,76 @@ import (
 
 // Register user baru
 func Register(c *fiber.Ctx) error {
-	user := new(models.User)
-	if err := c.BodyParser(user); err != nil {
+	var input dto.RegisterRequest
+
+	// Parse body ke struct RegisterRequest
+	if err := c.BodyParser(&input); err != nil {
 		return c.Status(400).JSON(fiber.Map{"error": "cannot parse json"})
 	}
 
+	// Validasi field wajib
+	if input.Email == "" || input.Name == "" || input.Password == "" {
+		return c.Status(400).JSON(fiber.Map{"error": "name, email, and password are required"})
+	}
+
 	// Hash password
-	hashed, _ := bcrypt.GenerateFromPassword([]byte(user.Password), 10)
-	user.Password = string(hashed)
+	hashed, err := bcrypt.GenerateFromPassword([]byte(input.Password), 10)
+	if err != nil {
+		return c.Status(500).JSON(fiber.Map{"error": "failed to hash password"})
+	}
+
+	user := models.User{
+		Name:     input.Name,
+		Email:    input.Email,
+		Password: string(hashed),
+	}
 
 	if err := database.DB.Create(&user).Error; err != nil {
 		return c.Status(500).JSON(fiber.Map{"error": "cannot create user"})
 	}
 
-	return c.JSON(fiber.Map{
-		"message": "user created",
-		"user": user,
+	return c.Status(201).JSON(fiber.Map{
+		"message": "user created successfully",
+		"user": fiber.Map{
+			"id":    user.ID,
+			"name":  user.Name,
+			"email": user.Email,
+			"role":  user.Role,
+		},
 	})
-
 }
+
 
 // Login
 func Login(c *fiber.Ctx) error {
-	req := new(models.User)
-	if err := c.BodyParser(req); err != nil {
-		return c.Status(400).JSON(fiber.Map{"error": "cannot parse json"})
-	}
+    var req dto.LoginRequest
+    if err := c.BodyParser(&req); err != nil {
+        return c.Status(400).JSON(fiber.Map{"error": "cannot parse json"})
+    }
 
-	var user models.User
-	database.DB.Where("email = ?", req.Email).First(&user)
-	if user.ID == 0 {
-		return c.Status(404).JSON(fiber.Map{"error": "user not found"})
-	}
+    var user models.User
+    if err := database.DB.Where("email = ?", req.Email).First(&user).Error; err != nil {
+        return c.Status(404).JSON(fiber.Map{"error": "user not found"})
+    }
 
-	if err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(req.Password)); err != nil {
-		return c.Status(400).JSON(fiber.Map{"error": "wrong password"})
-	}
+    if err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(req.Password)); err != nil {
+        return c.Status(400).JSON(fiber.Map{"error": "wrong password"})
+    }
 
-	// Generate JWT token (pindah ke helper di config/jwt.go)
-	token, err := config.GenerateJWT(user.ID, user.Email)
-	if err != nil {
-		return c.SendStatus(500)
-	}
+    token, err := config.GenerateJWT(user.ID, user.Email)
+    if err != nil {
+        return c.SendStatus(500)
+    }
 
-	return c.JSON(fiber.Map{
-		"user":  user,
-		"token": token,
-	})
+    return c.JSON(fiber.Map{
+        "user": fiber.Map{
+            "id":    user.ID,
+            "name":  user.Name,
+            "email": user.Email,
+            "role":  user.Role,
+        },
+        "token": token,
+    })
 }
 
 // Protected route

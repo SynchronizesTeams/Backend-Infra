@@ -211,7 +211,7 @@ func ShowUserLinks(c *fiber.Ctx) error {
 
 	var user_links []models.UserLinks
 
-	if err := database.DB.Where("user_id = ?", id).Find(&user_links).Error; err != nil {
+	if err := database.DB.Preload("User").Where("user_id = ?", id).Find(&user_links).Error; err != nil {
 		return c.Status(500).JSON(fiber.Map{
 			"error": "failed to fectch user links",
 		})
@@ -230,6 +230,13 @@ func ShowUserLinks(c *fiber.Ctx) error {
 			Title: link.Title,
 			Url: link.Url,
 			Icon: link.Icon,
+			User: dto.UserLinksWithUserResponse{
+				ID: link.User.ID,
+				Name: link.User.Name,
+				Email: link.User.Email,
+				PhotoUrl: link.User.PhotoUrl,
+				Jabatan: link.User.Jabatan,
+			},
 		})
 	}
 
