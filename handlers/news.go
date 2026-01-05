@@ -226,6 +226,7 @@ func GetNews(c *fiber.Ctx) error {
 			"status":    n.Status,
 			"viewCount": n.ViewCount,
 			"tags":      tagNames,
+			"content":   n.Content,
 			"author": fiber.Map{
 				"id":   n.Author.ID,
 				"name": n.Author.Name,
