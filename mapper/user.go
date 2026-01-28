@@ -7,7 +7,7 @@ import (
 )
 
 func UserToDTO(u models.User) dto.UserResponse {
-	return dto.UserResponse {
+	return dto.UserResponse{
 		ID:               u.ID,
 		NoInduk:          u.NoInduk,
 		Name:             u.Name,
@@ -22,32 +22,29 @@ func UserToDTO(u models.User) dto.UserResponse {
 }
 
 func UpdateUser(u *models.User, dto dto.UserRequest) {
-	if dto.NoInduk != "" {
-		u.NoInduk = dto.NoInduk
+	if dto.NoInduk != nil && *dto.NoInduk != "" {
+		u.NoInduk = *dto.NoInduk
 	}
-	if dto.Name != "" {
-		u.Name = dto.Name
+	if dto.Name != nil && *dto.Name != "" {
+		u.Name = *dto.Name
 	}
-	if dto.Email != "" {
-		u.Email = dto.Email
+	if dto.Email != nil && *dto.Email != "" {
+		u.Email = *dto.Email
 	}
-	if dto.Role != "" {
-		u.Role = dto.Role
+	if dto.Role != nil && *dto.Role != "" {
+		u.Role = *dto.Role
 	}
-	if dto.Phone != "" {
-		u.Phone = dto.Phone
+	if dto.Phone != nil && *dto.Phone != "" {
+		u.Phone = *dto.Phone
 	}
-	if dto.Alamat != "" {
-		u.Alamat = dto.Alamat
+	if dto.Alamat != nil && *dto.Alamat != "" {
+		u.Alamat = *dto.Alamat
 	}
-	if dto.Jabatan != "" {
-		u.Jabatan = dto.Jabatan
+	if dto.Jabatan != nil && *dto.Jabatan != "" {
+		u.Jabatan = *dto.Jabatan
 	}
-	if dto.TahunAjaranMulai != "" {
-		u.TahunAjaranMulai = dto.TahunAjaranMulai
-	}
-	if dto.Phone != "" {
-		u.Phone = dto.Phone
+	if dto.TahunAjaranMulai != nil && *dto.TahunAjaranMulai != "" {
+		u.TahunAjaranMulai = *dto.TahunAjaranMulai
 	}
 	u.UpdatedAt = time.Now()
 }

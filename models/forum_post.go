@@ -10,9 +10,9 @@ type ForumPost struct {
 	Title 		string 			`json:"title" gorm:"not null"`
 	Content 	string 			`json:"content" gorm:"type:text"`
 	Image 		string 			`json:"image"`
-	File 		string 			`json:"file"`
+	File 		string 				`json:"file"`
 	Status 		string 			`gorm:"type:enum('pending','approved','rejected','hidden');default:'pending'"`
-	Upvote 		int 			`json:"upvote"`
+	Upvote 		int 				`json:"upvote"`
 	Downvote 	int 			`json:"downvote"`
 	ReplyCount 	int 			`json:"reply_count"`
 	IsHidden 	bool 			`json:"is_hidden"`
