@@ -78,15 +78,9 @@ func EditTeacher(c *fiber.Ctx) error {
 		})
 	}
 
-	var input dto.TeacherRequest
-	if err := c.BodyParser(&input); err != nil {
-		return c.Status(500).JSON(fiber.Map{
-			"error": "invalid form data",
-		})
-	}
-
-	file, _ := c.FormFile("photo")
-	if file != nil {
+	// Handle photo update first
+	file, err := c.FormFile("photo")
+	if err == nil {
 		path, err := helpers.SaveUpdatedFile(c, file, "uploads/teachers", teacher.Photo)
 		if err != nil {
 			return c.Status(500).JSON(fiber.Map{
@@ -94,6 +88,13 @@ func EditTeacher(c *fiber.Ctx) error {
 			})
 		}
 		teacher.Photo = path
+	}
+
+	var input dto.TeacherRequest
+	if err := c.BodyParser(&input); err != nil {
+		return c.Status(400).JSON(fiber.Map{
+			"error": "invalid form data",
+		})
 	}
 
 	mapper.UpdateTeacherFromDTO(&teacher, input)

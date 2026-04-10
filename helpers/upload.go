@@ -40,7 +40,7 @@ func SaveUpdatedFile(c *fiber.Ctx, file *multipart.FileHeader, folder string, ol
 	}
 
 	// Buat nama file unik
-	filename := fmt.Sprintf("%d_%s", time.Now().Unix(), file.Filename)
+	filename := fmt.Sprintf("%d_%s", time.Now().Unix(), filepath.Base(file.Filename))
 	fullPath := filepath.Join(folder, filename)
 
 	// Simpan file baru
