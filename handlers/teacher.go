@@ -78,16 +78,21 @@ func EditTeacher(c *fiber.Ctx) error {
 		})
 	}
 
-	// Handle photo update first
-	file, err := c.FormFile("photo")
+	// Handle photo update
+	oldPhoto := teacher.Photo
+	newPath, err := helpers.SaveUploadedFile(c, "photo", "uploads/teachers")
 	if err == nil {
-		path, err := helpers.SaveUpdatedFile(c, file, "uploads/teachers", teacher.Photo)
-		if err != nil {
-			return c.Status(500).JSON(fiber.Map{
-				"error": "failed to update photo",
-			})
+		teacher.Photo = newPath
+		// Hapus foto lama jika ada dan berbeda
+		if oldPhoto != "" && oldPhoto != newPath {
+			_ = os.Remove(oldPhoto)
 		}
-		teacher.Photo = path
+	} else if err != fiber.ErrUnprocessableEntity && err.Error() != "there is no file for the provided key" {
+		// Jika error selain "file tidak ada", return error
+		return c.Status(500).JSON(fiber.Map{
+			"error":   "failed to update photo",
+			"details": err.Error(),
+		})
 	}
 
 	var input dto.TeacherRequest
