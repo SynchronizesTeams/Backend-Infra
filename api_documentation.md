@@ -263,165 +263,76 @@ Errors are standardized in JSON format with appropriate HTTP status codes (400, 
 
 ## 3. API Endpoints
 
-### /SHOW Routes
+### 📁 Public Routes
+Kumpulan endpoint untuk modul **Public**.
 
-#### `GET /show/:id`
-**Description**: Handled by `ShowAchievement`
-**Authentication**: None
-
-**Response Format**: JSON
-
-#### `GET /show/:id`
-**Description**: Handled by `ShowCertification`
-**Authentication**: None
+#### `GET /public/achievement/show/:id`
+**Group Route:** `/public/achievement`
+**Handler:** `ShowAchievement`
+**Authentication:** None
 
 **Response Format**: JSON
 
-#### `GET /show/:id`
-**Description**: Handled by `ShowEskul`
-**Authentication**: None
+#### `GET /public/achievement/showAll`
+**Group Route:** `/public/achievement`
+**Handler:** `ShowAllAchievement`
+**Authentication:** None
 
 **Response Format**: JSON
 
-#### `GET /show/:id`
-**Description**: Handled by `GetEvent`
-**Authentication**: None
+#### `GET /public/certification/show/:id`
+**Group Route:** `/public/certification`
+**Handler:** `ShowCertification`
+**Authentication:** None
 
 **Response Format**: JSON
 
-#### `GET /show/date/:date`
-**Description**: Handled by `GetEventByDate`
-**Authentication**: None
+#### `GET /public/certification/showAll`
+**Group Route:** `/public/certification`
+**Handler:** `ShowAllCertification`
+**Authentication:** None
 
 **Response Format**: JSON
 
-#### `GET /show/:id`
-**Description**: Handled by `GetGuestBook`
-**Authentication**: None
+#### `GET /public/eskul/show/:id`
+**Group Route:** `/public/eskul`
+**Handler:** `ShowEskul`
+**Authentication:** None
 
 **Response Format**: JSON
 
-#### `GET /show`
-**Description**: Handled by `ShowImagesByCategory`
-**Authentication**: None
+#### `GET /public/eskul/showAll`
+**Group Route:** `/public/eskul`
+**Handler:** `ShowAllEskul`
+**Authentication:** None
 
 **Response Format**: JSON
 
-#### `GET /show/:id`
-**Description**: Handled by `ShowIndustry`
-**Authentication**: None
+#### `GET /public/event/show/:id`
+**Group Route:** `/public/event`
+**Handler:** `GetEvent`
+**Authentication:** None
 
 **Response Format**: JSON
 
-#### `GET /show/:id`
-**Description**: Handled by `ShowMading`
-**Authentication**: None
+#### `GET /public/event/showAll`
+**Group Route:** `/public/event`
+**Handler:** `GetAllEvent`
+**Authentication:** None
 
 **Response Format**: JSON
 
-#### `GET /show/:id`
-**Description**: Handled by `ShowPortal`
-**Authentication**: None
+#### `GET /public/event/show/date/:date`
+**Group Route:** `/public/event`
+**Handler:** `GetEventByDate`
+**Authentication:** None
 
 **Response Format**: JSON
 
-#### `GET /show/:id`
-**Description**: Handled by `ShowTeacher`
-**Authentication**: None
-
-**Response Format**: JSON
-
-#### `GET /show/:id`
-**Description**: Handled by `ShowTestimonial`
-**Authentication**: None
-
-**Response Format**: JSON
-
-#### `GET /show/:id`
-**Description**: Handled by `ShowUserLinks`
-**Authentication**: None
-
-**Response Format**: JSON
-
-### /SHOWALL Routes
-
-#### `GET /showAll`
-**Description**: Handled by `ShowAllAchievement`
-**Authentication**: None
-
-**Response Format**: JSON
-
-#### `GET /showAll`
-**Description**: Handled by `ShowAllCertification`
-**Authentication**: None
-
-**Response Format**: JSON
-
-#### `GET /showAll`
-**Description**: Handled by `ShowAllEskul`
-**Authentication**: None
-
-**Response Format**: JSON
-
-#### `GET /showAll`
-**Description**: Handled by `GetAllEvent`
-**Authentication**: None
-
-**Response Format**: JSON
-
-#### `GET /showAll`
-**Description**: Handled by `GetAllGuestBook`
-**Authentication**: None
-
-**Response Format**: JSON
-
-#### `GET /showAll`
-**Description**: Handled by `ShowAllImages`
-**Authentication**: None
-
-**Response Format**: JSON
-
-#### `GET /showAll`
-**Description**: Handled by `ShowAllIndustry`
-**Authentication**: None
-
-**Response Format**: JSON
-
-#### `GET /showAll`
-**Description**: Handled by `ShowAllMadings`
-**Authentication**: None
-
-**Response Format**: JSON
-
-#### `GET /showAll`
-**Description**: Handled by `ShowAllPortal`
-**Authentication**: None
-
-**Response Format**: JSON
-
-#### `GET /showAll`
-**Description**: Handled by `ShowAllTeachers`
-**Authentication**: None
-
-**Response Format**: JSON
-
-#### `GET /showAll`
-**Description**: Handled by `ShowAllTestimonial`
-**Authentication**: None
-
-**Response Format**: JSON
-
-#### `GET /showAll`
-**Description**: Handled by `ShowAllSection`
-**Authentication**: None
-
-**Response Format**: JSON
-
-### /CREATE Routes
-
-#### `POST /create`
-**Description**: Handled by `CreateGuest`
-**Authentication**: None
+#### `POST /public/guest/create`
+**Group Route:** `/public/guest`
+**Handler:** `CreateGuest`
+**Authentication:** Required (JWT)
 
 **Request Body Schema** (JSON):
 ```json
@@ -438,35 +349,146 @@ Errors are standardized in JSON format with appropriate HTTP status codes (400, 
 
 **Response Format**: JSON
 
-### /GETALL Routes
-
-#### `GET /getAll`
-**Description**: Handled by `GetAllNews`
-**Authentication**: None
-
-**Response Format**: JSON
-
-### /GET Routes
-
-#### `GET /get/:id`
-**Description**: Handled by `GetNews`
-**Authentication**: None
+#### `GET /public/guest/showAll`
+**Group Route:** `/public/guest`
+**Handler:** `GetAllGuestBook`
+**Authentication:** None
 
 **Response Format**: JSON
 
-### /:ID Routes
-
-#### `GET profile/:id`
-**Description**: Handled by `ProfilePublic`
-**Authentication**: None
+#### `GET /public/guest/show/:id`
+**Group Route:** `/public/guest`
+**Handler:** `GetGuestBook`
+**Authentication:** None
 
 **Response Format**: JSON
 
-### /CERTIFICATION Routes
+#### `GET /public/image/showAll`
+**Group Route:** `/public/image`
+**Handler:** `ShowAllImages`
+**Authentication:** None
+
+**Response Format**: JSON
+
+#### `GET /public/image/show`
+**Group Route:** `/public/image`
+**Handler:** `ShowImagesByCategory`
+**Authentication:** None
+
+**Response Format**: JSON
+
+#### `GET /public/industry/show/:id`
+**Group Route:** `/public/industry`
+**Handler:** `ShowIndustry`
+**Authentication:** None
+
+**Response Format**: JSON
+
+#### `GET /public/industry/showAll`
+**Group Route:** `/public/industry`
+**Handler:** `ShowAllIndustry`
+**Authentication:** None
+
+**Response Format**: JSON
+
+#### `GET /public/mading/show/:id`
+**Group Route:** `/public/mading`
+**Handler:** `ShowMading`
+**Authentication:** None
+
+**Response Format**: JSON
+
+#### `GET /public/mading/showAll`
+**Group Route:** `/public/mading`
+**Handler:** `ShowAllMadings`
+**Authentication:** None
+
+**Response Format**: JSON
+
+#### `GET /public/news/getAll`
+**Group Route:** `/public/news`
+**Handler:** `GetAllNews`
+**Authentication:** None
+
+**Response Format**: JSON
+
+#### `GET /public/news/get/:id`
+**Group Route:** `/public/news`
+**Handler:** `GetNews`
+**Authentication:** None
+
+**Response Format**: JSON
+
+#### `GET /public/portal/show/:id`
+**Group Route:** `/public/portal`
+**Handler:** `ShowPortal`
+**Authentication:** None
+
+**Response Format**: JSON
+
+#### `GET /public/portal/showAll`
+**Group Route:** `/public/portal`
+**Handler:** `ShowAllPortal`
+**Authentication:** None
+
+**Response Format**: JSON
+
+#### `GET /public/teacher/showAll`
+**Group Route:** `/public/teacher`
+**Handler:** `ShowAllTeachers`
+**Authentication:** None
+
+**Response Format**: JSON
+
+#### `GET /public/teacher/show/:id`
+**Group Route:** `/public/teacher`
+**Handler:** `ShowTeacher`
+**Authentication:** None
+
+**Response Format**: JSON
+
+#### `GET /public/testimonial/showAll`
+**Group Route:** `/public/testimonial`
+**Handler:** `ShowAllTestimonial`
+**Authentication:** None
+
+**Response Format**: JSON
+
+#### `GET /public/testimonial/show/:id`
+**Group Route:** `/public/testimonial`
+**Handler:** `ShowTestimonial`
+**Authentication:** None
+
+**Response Format**: JSON
+
+#### `GET /public/user-link/show/:id`
+**Group Route:** `/public/user-link`
+**Handler:** `ShowUserLinks`
+**Authentication:** None
+
+**Response Format**: JSON
+
+#### `GET /public/forum-section/showAll`
+**Group Route:** `/public/forum-section`
+**Handler:** `ShowAllSection`
+**Authentication:** None
+
+**Response Format**: JSON
+
+#### `GET /public/userprofile/:id`
+**Group Route:** `/public/user`
+**Handler:** `ProfilePublic`
+**Authentication:** None
+
+**Response Format**: JSON
+
+### 📁 Certification Routes
+Kumpulan endpoint untuk modul **Certification**.
 
 #### `POST /certification/create`
-**Description**: Handled by `CreateCertification`
-**Authentication**: None
+**Group Route:** `/certification`
+**Handler:** `CreateCertification`
+**Authentication:** Required (JWT)
 
 **Request Body Schema** (JSON):
 ```json
@@ -484,8 +506,9 @@ Errors are standardized in JSON format with appropriate HTTP status codes (400, 
 **Response Format**: JSON
 
 #### `POST /certification/edit/:id`
-**Description**: Handled by `EditCertification`
-**Authentication**: None
+**Group Route:** `/certification`
+**Handler:** `EditCertification`
+**Authentication:** Required (JWT)
 
 **Request Body Schema** (JSON):
 ```json
@@ -503,28 +526,33 @@ Errors are standardized in JSON format with appropriate HTTP status codes (400, 
 **Response Format**: JSON
 
 #### `GET /certification/show/:id`
-**Description**: Handled by `ShowCertification`
-**Authentication**: None
+**Group Route:** `/certification`
+**Handler:** `ShowCertification`
+**Authentication:** None
 
 **Response Format**: JSON
 
 #### `GET /certification/showAll`
-**Description**: Handled by `ShowAllCertification`
-**Authentication**: None
+**Group Route:** `/certification`
+**Handler:** `ShowAllCertification`
+**Authentication:** None
 
 **Response Format**: JSON
 
 #### `DELETE /certification/delete/:id`
-**Description**: Handled by `DeleteCertification`
-**Authentication**: None
+**Group Route:** `/certification`
+**Handler:** `DeleteCertification`
+**Authentication:** Required (JWT)
 
 **Response Format**: JSON
 
-### /AUTH Routes
+### 📁 Auth Routes
+Kumpulan endpoint untuk modul **Auth**.
 
 #### `POST /auth/register`
-**Description**: Handled by `Register`
-**Authentication**: Required (JWT)
+**Group Route:** `/auth`
+**Handler:** `Register`
+**Authentication:** Required (JWT)
 
 **Request Body Schema** (JSON):
 ```json
@@ -538,8 +566,9 @@ Errors are standardized in JSON format with appropriate HTTP status codes (400, 
 **Response Format**: JSON
 
 #### `POST /auth/login`
-**Description**: Handled by `Login`
-**Authentication**: Required (JWT)
+**Group Route:** `/auth`
+**Handler:** `Login`
+**Authentication:** Required (JWT)
 
 **Request Body Schema** (JSON):
 ```json
@@ -552,14 +581,16 @@ Errors are standardized in JSON format with appropriate HTTP status codes (400, 
 **Response Format**: JSON
 
 #### `GET /auth/profile`
-**Description**: Handled by `Profile`
-**Authentication**: Required (JWT)
+**Group Route:** `/auth`
+**Handler:** `Profile`
+**Authentication:** Required (JWT)
 
 **Response Format**: JSON
 
 #### `POST /auth/edit`
-**Description**: Handled by `EditProfile`
-**Authentication**: Required (JWT)
+**Group Route:** `/auth`
+**Handler:** `EditProfile`
+**Authentication:** Required (JWT)
 
 **Request Body Schema** (JSON):
 ```json
@@ -578,37 +609,44 @@ Errors are standardized in JSON format with appropriate HTTP status codes (400, 
 
 **Response Format**: JSON
 
-### /FORUM-SECTION Routes
+### 📁 Forum_section Routes
+Kumpulan endpoint untuk modul **Forum_section**.
 
 #### `POST /forum-section/create`
-**Description**: Handled by `CreateSection`
-**Authentication**: None
+**Group Route:** `/forum-section`
+**Handler:** `CreateSection`
+**Authentication:** Required (JWT)
 
 **Response Format**: JSON
 
 #### `POST /forum-section/edit/:id`
-**Description**: Handled by `EditSection`
-**Authentication**: None
+**Group Route:** `/forum-section`
+**Handler:** `EditSection`
+**Authentication:** Required (JWT)
 
 **Response Format**: JSON
 
 #### `DELETE /forum-section/delete/:id`
-**Description**: Handled by `DeleteSection`
-**Authentication**: None
+**Group Route:** `/forum-section`
+**Handler:** `DeleteSection`
+**Authentication:** Required (JWT)
 
 **Response Format**: JSON
 
 #### `GET /forum-section/showAll`
-**Description**: Handled by `ShowAllSection`
-**Authentication**: None
+**Group Route:** `/forum-section`
+**Handler:** `ShowAllSection`
+**Authentication:** None
 
 **Response Format**: JSON
 
-### /TESTIMONIAL Routes
+### 📁 Testimonial Routes
+Kumpulan endpoint untuk modul **Testimonial**.
 
 #### `POST /testimonial/create`
-**Description**: Handled by `CreateTestimonial`
-**Authentication**: None
+**Group Route:** `/testimonial`
+**Handler:** `CreateTestimonial`
+**Authentication:** Required (JWT)
 
 **Request Body Schema** (JSON):
 ```json
@@ -622,8 +660,9 @@ Errors are standardized in JSON format with appropriate HTTP status codes (400, 
 **Response Format**: JSON
 
 #### `POST /testimonial/edit/:id`
-**Description**: Handled by `EditTestimonial`
-**Authentication**: None
+**Group Route:** `/testimonial`
+**Handler:** `EditTestimonial`
+**Authentication:** Required (JWT)
 
 **Request Body Schema** (JSON):
 ```json
@@ -637,28 +676,33 @@ Errors are standardized in JSON format with appropriate HTTP status codes (400, 
 **Response Format**: JSON
 
 #### `GET /testimonial/show/:id`
-**Description**: Handled by `ShowTestimonial`
-**Authentication**: None
+**Group Route:** `/testimonial`
+**Handler:** `ShowTestimonial`
+**Authentication:** None
 
 **Response Format**: JSON
 
 #### `GET /testimonial/showAll`
-**Description**: Handled by `ShowAllTestimonial`
-**Authentication**: None
+**Group Route:** `/testimonial`
+**Handler:** `ShowAllTestimonial`
+**Authentication:** None
 
 **Response Format**: JSON
 
 #### `DELETE /testimonial/delete/:id`
-**Description**: Handled by `DeleteTestimonial`
-**Authentication**: None
+**Group Route:** `/testimonial`
+**Handler:** `DeleteTestimonial`
+**Authentication:** Required (JWT)
 
 **Response Format**: JSON
 
-### /EVENT Routes
+### 📁 Event Routes
+Kumpulan endpoint untuk modul **Event**.
 
 #### `POST /event/create`
-**Description**: Handled by `CreateEvent`
-**Authentication**: None
+**Group Route:** `/event`
+**Handler:** `CreateEvent`
+**Authentication:** Required (JWT)
 
 **Request Body Schema** (JSON):
 ```json
@@ -676,8 +720,9 @@ Errors are standardized in JSON format with appropriate HTTP status codes (400, 
 **Response Format**: JSON
 
 #### `POST /event/edit/:id`
-**Description**: Handled by `EditEvent`
-**Authentication**: None
+**Group Route:** `/event`
+**Handler:** `EditEvent`
+**Authentication:** Required (JWT)
 
 **Request Body Schema** (JSON):
 ```json
@@ -695,34 +740,40 @@ Errors are standardized in JSON format with appropriate HTTP status codes (400, 
 **Response Format**: JSON
 
 #### `DELETE /event/delete/:id`
-**Description**: Handled by `DeleteEvent`
-**Authentication**: None
+**Group Route:** `/event`
+**Handler:** `DeleteEvent`
+**Authentication:** Required (JWT)
 
 **Response Format**: JSON
 
 #### `GET /event/show/:id`
-**Description**: Handled by `GetEvent`
-**Authentication**: None
+**Group Route:** `/event`
+**Handler:** `GetEvent`
+**Authentication:** None
 
 **Response Format**: JSON
 
 #### `GET /event/showAll`
-**Description**: Handled by `GetAllEvent`
-**Authentication**: None
+**Group Route:** `/event`
+**Handler:** `GetAllEvent`
+**Authentication:** None
 
 **Response Format**: JSON
 
 #### `PUT /event/change-visibility/:id`
-**Description**: Handled by `ChangeVisibility`
-**Authentication**: None
+**Group Route:** `/event`
+**Handler:** `ChangeVisibility`
+**Authentication:** None
 
 **Response Format**: JSON
 
-### /ACHIEVEMENT Routes
+### 📁 Achievement Routes
+Kumpulan endpoint untuk modul **Achievement**.
 
 #### `POST /achievement/create`
-**Description**: Handled by `CreateAchievement`
-**Authentication**: None
+**Group Route:** `/achievement`
+**Handler:** `CreateAchievement`
+**Authentication:** Required (JWT)
 
 **Request Body Schema** (JSON):
 ```json
@@ -738,8 +789,9 @@ Errors are standardized in JSON format with appropriate HTTP status codes (400, 
 **Response Format**: JSON
 
 #### `POST /achievement/edit/:id`
-**Description**: Handled by `EditAchievement`
-**Authentication**: None
+**Group Route:** `/achievement`
+**Handler:** `EditAchievement`
+**Authentication:** Required (JWT)
 
 **Request Body Schema** (JSON):
 ```json
@@ -755,28 +807,33 @@ Errors are standardized in JSON format with appropriate HTTP status codes (400, 
 **Response Format**: JSON
 
 #### `GET /achievement/show/:id`
-**Description**: Handled by `ShowAchievement`
-**Authentication**: None
+**Group Route:** `/achievement`
+**Handler:** `ShowAchievement`
+**Authentication:** None
 
 **Response Format**: JSON
 
 #### `GET /achievement/showAll`
-**Description**: Handled by `ShowAllAchievement`
-**Authentication**: None
+**Group Route:** `/achievement`
+**Handler:** `ShowAllAchievement`
+**Authentication:** None
 
 **Response Format**: JSON
 
 #### `DELETE /achievement/delete/:id`
-**Description**: Handled by `DeleteAchievement`
-**Authentication**: None
+**Group Route:** `/achievement`
+**Handler:** `DeleteAchievement`
+**Authentication:** Required (JWT)
 
 **Response Format**: JSON
 
-### /INDUSTRY Routes
+### 📁 Industry Routes
+Kumpulan endpoint untuk modul **Industry**.
 
 #### `POST /industry/create`
-**Description**: Handled by `CreateIndustry`
-**Authentication**: None
+**Group Route:** `/industry`
+**Handler:** `CreateIndustry`
+**Authentication:** Required (JWT)
 
 **Request Body Schema** (JSON):
 ```json
@@ -791,8 +848,9 @@ Errors are standardized in JSON format with appropriate HTTP status codes (400, 
 **Response Format**: JSON
 
 #### `POST /industry/edit/:id`
-**Description**: Handled by `EditIndustry`
-**Authentication**: None
+**Group Route:** `/industry`
+**Handler:** `EditIndustry`
+**Authentication:** Required (JWT)
 
 **Request Body Schema** (JSON):
 ```json
@@ -807,72 +865,85 @@ Errors are standardized in JSON format with appropriate HTTP status codes (400, 
 **Response Format**: JSON
 
 #### `GET /industry/show/:id`
-**Description**: Handled by `ShowIndustry`
-**Authentication**: None
+**Group Route:** `/industry`
+**Handler:** `ShowIndustry`
+**Authentication:** None
 
 **Response Format**: JSON
 
 #### `GET /industry/showAll`
-**Description**: Handled by `ShowAllIndustry`
-**Authentication**: None
+**Group Route:** `/industry`
+**Handler:** `ShowAllIndustry`
+**Authentication:** None
 
 **Response Format**: JSON
 
 #### `DELETE /industry/delete/:id`
-**Description**: Handled by `DeleteIndustry`
-**Authentication**: None
+**Group Route:** `/industry`
+**Handler:** `DeleteIndustry`
+**Authentication:** Required (JWT)
 
 **Response Format**: JSON
 
-### /NEWS Routes
+### 📁 News Routes
+Kumpulan endpoint untuk modul **News**.
 
 #### `POST /news/create`
-**Description**: Handled by `CreateNews`
-**Authentication**: None
+**Group Route:** `/news`
+**Handler:** `CreateNews`
+**Authentication:** Required (JWT)
 
 **Response Format**: JSON
 
 #### `POST /news/update/:id`
-**Description**: Handled by `UpdateNews`
-**Authentication**: None
+**Group Route:** `/news`
+**Handler:** `UpdateNews`
+**Authentication:** None
 
 **Response Format**: JSON
 
 #### `GET /news/getAll`
-**Description**: Handled by `GetAllNews`
-**Authentication**: None
+**Group Route:** `/news`
+**Handler:** `GetAllNews`
+**Authentication:** None
 
 **Response Format**: JSON
 
 #### `GET /news/get/:id`
-**Description**: Handled by `GetNews`
-**Authentication**: None
+**Group Route:** `/news`
+**Handler:** `GetNews`
+**Authentication:** None
 
 **Response Format**: JSON
 
 #### `DELETE /news/delete/:id`
-**Description**: Handled by `DeleteNews`
-**Authentication**: None
+**Group Route:** `/news`
+**Handler:** `DeleteNews`
+**Authentication:** Required (JWT)
 
 **Response Format**: JSON
 
 #### `POST /news/addView/:id`
-**Description**: Handled by `AddView`
-**Authentication**: None
+**Group Route:** `/news`
+**Handler:** `AddView`
+**Authentication:** None
 
 **Response Format**: JSON
 
 #### `POST /news/changeStatus/:id`
-**Description**: Handled by `ChangeStatus`
-**Authentication**: None
+**Group Route:** `/news`
+**Handler:** `ChangeStatus`
+**Authentication:** None
 
 **Response Format**: JSON
 
-### /TEACHER Routes
+### 📁 Teacher Routes
+Kumpulan endpoint untuk modul **Teacher**.
 
 #### `POST /teacher/create`
-**Description**: Handled by `CreateTeacher`
-**Authentication**: None
+**Group Route:** `/teacher`
+**Handler:** `CreateTeacher`
+**Authentication:** Required (JWT)
 
 **Request Body Schema** (JSON):
 ```json
@@ -888,8 +959,9 @@ Errors are standardized in JSON format with appropriate HTTP status codes (400, 
 **Response Format**: JSON
 
 #### `POST /teacher/edit/:id`
-**Description**: Handled by `EditTeacher`
-**Authentication**: None
+**Group Route:** `/teacher`
+**Handler:** `EditTeacher`
+**Authentication:** Required (JWT)
 
 **Request Body Schema** (JSON):
 ```json
@@ -905,54 +977,64 @@ Errors are standardized in JSON format with appropriate HTTP status codes (400, 
 **Response Format**: JSON
 
 #### `DELETE /teacher/delete/:id`
-**Description**: Handled by `DeleteTeacher`
-**Authentication**: None
+**Group Route:** `/teacher`
+**Handler:** `DeleteTeacher`
+**Authentication:** Required (JWT)
 
 **Response Format**: JSON
 
 #### `GET /teacher/showAll`
-**Description**: Handled by `ShowAllTeachers`
-**Authentication**: None
+**Group Route:** `/teacher`
+**Handler:** `ShowAllTeachers`
+**Authentication:** None
 
 **Response Format**: JSON
 
 #### `GET /teacher/show/:id`
-**Description**: Handled by `ShowTeacher`
-**Authentication**: None
+**Group Route:** `/teacher`
+**Handler:** `ShowTeacher`
+**Authentication:** None
 
 **Response Format**: JSON
 
-### /USER-LINKS Routes
+### 📁 User_links Routes
+Kumpulan endpoint untuk modul **User_links**.
 
 #### `POST /user-links/add`
-**Description**: Handled by `AddLink`
-**Authentication**: None
+**Group Route:** `/user-links`
+**Handler:** `AddLink`
+**Authentication:** None
 
 **Response Format**: JSON
 
 #### `POST /user-links/edit/:id`
-**Description**: Handled by `EditLinks`
-**Authentication**: None
+**Group Route:** `/user-links`
+**Handler:** `EditLinks`
+**Authentication:** Required (JWT)
 
 **Response Format**: JSON
 
 #### `GET /user-links/show/self`
-**Description**: Handled by `ShowUserLinksSelf`
-**Authentication**: None
+**Group Route:** `/user-links`
+**Handler:** `ShowUserLinksSelf`
+**Authentication:** None
 
 **Response Format**: JSON
 
 #### `DELETE /user-links/delete/:id`
-**Description**: Handled by `DeleteLinks`
-**Authentication**: None
+**Group Route:** `/user-links`
+**Handler:** `DeleteLinks`
+**Authentication:** Required (JWT)
 
 **Response Format**: JSON
 
-### /GUEST-BOOK Routes
+### 📁 Guest_books Routes
+Kumpulan endpoint untuk modul **Guest_books**.
 
 #### `POST /guest-book/create`
-**Description**: Handled by `CreateGuest`
-**Authentication**: None
+**Group Route:** `/guest-book`
+**Handler:** `CreateGuest`
+**Authentication:** Required (JWT)
 
 **Request Body Schema** (JSON):
 ```json
@@ -970,8 +1052,9 @@ Errors are standardized in JSON format with appropriate HTTP status codes (400, 
 **Response Format**: JSON
 
 #### `POST /guest-book/edit/:id`
-**Description**: Handled by `EditGuest`
-**Authentication**: None
+**Group Route:** `/guest-book`
+**Handler:** `EditGuest`
+**Authentication:** Required (JWT)
 
 **Request Body Schema** (JSON):
 ```json
@@ -989,34 +1072,40 @@ Errors are standardized in JSON format with appropriate HTTP status codes (400, 
 **Response Format**: JSON
 
 #### `GET /guest-book/showAll`
-**Description**: Handled by `GetAllGuestBook`
-**Authentication**: None
+**Group Route:** `/guest-book`
+**Handler:** `GetAllGuestBook`
+**Authentication:** None
 
 **Response Format**: JSON
 
 #### `GET /guest-book/show/:id`
-**Description**: Handled by `GetGuestBook`
-**Authentication**: None
+**Group Route:** `/guest-book`
+**Handler:** `GetGuestBook`
+**Authentication:** None
 
 **Response Format**: JSON
 
 #### `PUT /guest-book/approve/:id`
-**Description**: Handled by `ApprovedGuest`
-**Authentication**: None
+**Group Route:** `/guest-book`
+**Handler:** `ApprovedGuest`
+**Authentication:** None
 
 **Response Format**: JSON
 
 #### `PUT /guest-book/reject/:id`
-**Description**: Handled by `RejectGuestBook`
-**Authentication**: None
+**Group Route:** `/guest-book`
+**Handler:** `RejectGuestBook`
+**Authentication:** None
 
 **Response Format**: JSON
 
-### /FORUM-POST Routes
+### 📁 Forum_post Routes
+Kumpulan endpoint untuk modul **Forum_post**.
 
 #### `POST /forum-post/create`
-**Description**: Handled by `CreatePost`
-**Authentication**: None
+**Group Route:** `/forum-post`
+**Handler:** `CreatePost`
+**Authentication:** Required (JWT)
 
 **Request Body Schema** (JSON):
 ```json
@@ -1030,8 +1119,9 @@ Errors are standardized in JSON format with appropriate HTTP status codes (400, 
 **Response Format**: JSON
 
 #### `POST /forum-post/edit/:id`
-**Description**: Handled by `EditPost`
-**Authentication**: None
+**Group Route:** `/forum-post`
+**Handler:** `EditPost`
+**Authentication:** Required (JWT)
 
 **Request Body Schema** (JSON):
 ```json
@@ -1045,64 +1135,75 @@ Errors are standardized in JSON format with appropriate HTTP status codes (400, 
 **Response Format**: JSON
 
 #### `DELETE /forum-post/delete/:id`
-**Description**: Handled by `DeletePost`
-**Authentication**: None
+**Group Route:** `/forum-post`
+**Handler:** `DeletePost`
+**Authentication:** Required (JWT)
 
 **Response Format**: JSON
 
 #### `GET /forum-post/showAll`
-**Description**: Handled by `GetAllPost`
-**Authentication**: None
+**Group Route:** `/forum-post`
+**Handler:** `GetAllPost`
+**Authentication:** None
 
 **Response Format**: JSON
 
 #### `GET /forum-post/show/:id`
-**Description**: Handled by `ShowPostById`
-**Authentication**: None
+**Group Route:** `/forum-post`
+**Handler:** `ShowPostById`
+**Authentication:** None
 
 **Response Format**: JSON
 
 #### `PUT /forum-post/changeStatus`
-**Description**: Handled by `ChangePostStatus`
-**Authentication**: None
+**Group Route:** `/forum-post`
+**Handler:** `ChangePostStatus`
+**Authentication:** None
 
 **Response Format**: JSON
 
 #### `PUT /forum-post/upvote/:id`
-**Description**: Handled by `UpvotePost`
-**Authentication**: None
+**Group Route:** `/forum-post`
+**Handler:** `UpvotePost`
+**Authentication:** None
 
 **Response Format**: JSON
 
 #### `PUT /forum-post/downvote/:id`
-**Description**: Handled by `DownvotePost`
-**Authentication**: None
+**Group Route:** `/forum-post`
+**Handler:** `DownvotePost`
+**Authentication:** None
 
 **Response Format**: JSON
 
 #### `POST /forum-post/reply/:id`
-**Description**: Handled by `CreateReply`
-**Authentication**: None
+**Group Route:** `/forum-post`
+**Handler:** `CreateReply`
+**Authentication:** None
 
 **Response Format**: JSON
 
 #### `GET /forum-post/post-replies/:id`
-**Description**: Handled by `GetPostWithReplies`
-**Authentication**: None
+**Group Route:** `/forum-post`
+**Handler:** `GetPostWithReplies`
+**Authentication:** None
 
 **Response Format**: JSON
 
 #### `GET /forum-post/replies/:id`
-**Description**: Handled by `GetNestedReplies`
-**Authentication**: None
+**Group Route:** `/forum-post`
+**Handler:** `GetNestedReplies`
+**Authentication:** None
 
 **Response Format**: JSON
 
-### /PORTAL Routes
+### 📁 Portal Routes
+Kumpulan endpoint untuk modul **Portal**.
 
 #### `POST /portal/create`
-**Description**: Handled by `CreatePortal`
-**Authentication**: None
+**Group Route:** `/portal`
+**Handler:** `CreatePortal`
+**Authentication:** Required (JWT)
 
 **Request Body Schema** (JSON):
 ```json
@@ -1118,8 +1219,9 @@ Errors are standardized in JSON format with appropriate HTTP status codes (400, 
 **Response Format**: JSON
 
 #### `POST /portal/edit/:id`
-**Description**: Handled by `EditPortal`
-**Authentication**: None
+**Group Route:** `/portal`
+**Handler:** `EditPortal`
+**Authentication:** Required (JWT)
 
 **Request Body Schema** (JSON):
 ```json
@@ -1135,28 +1237,33 @@ Errors are standardized in JSON format with appropriate HTTP status codes (400, 
 **Response Format**: JSON
 
 #### `GET /portal/show/:id`
-**Description**: Handled by `ShowPortal`
-**Authentication**: None
+**Group Route:** `/portal`
+**Handler:** `ShowPortal`
+**Authentication:** None
 
 **Response Format**: JSON
 
 #### `GET /portal/showAll`
-**Description**: Handled by `ShowAllPortal`
-**Authentication**: None
+**Group Route:** `/portal`
+**Handler:** `ShowAllPortal`
+**Authentication:** None
 
 **Response Format**: JSON
 
 #### `DELETE /portal/delete/:id`
-**Description**: Handled by `DeletePortal`
-**Authentication**: None
+**Group Route:** `/portal`
+**Handler:** `DeletePortal`
+**Authentication:** Required (JWT)
 
 **Response Format**: JSON
 
-### /ESKUL Routes
+### 📁 Eskul Routes
+Kumpulan endpoint untuk modul **Eskul**.
 
 #### `POST /eskul/create`
-**Description**: Handled by `CreateEskul`
-**Authentication**: None
+**Group Route:** `/eskul`
+**Handler:** `CreateEskul`
+**Authentication:** Required (JWT)
 
 **Request Body Schema** (JSON):
 ```json
@@ -1170,8 +1277,9 @@ Errors are standardized in JSON format with appropriate HTTP status codes (400, 
 **Response Format**: JSON
 
 #### `POST /eskul/edit/:id`
-**Description**: Handled by `EditEskul`
-**Authentication**: None
+**Group Route:** `/eskul`
+**Handler:** `EditEskul`
+**Authentication:** Required (JWT)
 
 **Request Body Schema** (JSON):
 ```json
@@ -1185,54 +1293,64 @@ Errors are standardized in JSON format with appropriate HTTP status codes (400, 
 **Response Format**: JSON
 
 #### `GET /eskul/show/:id`
-**Description**: Handled by `ShowEskul`
-**Authentication**: None
+**Group Route:** `/eskul`
+**Handler:** `ShowEskul`
+**Authentication:** None
 
 **Response Format**: JSON
 
 #### `GET /eskul/showAll`
-**Description**: Handled by `ShowAllEskul`
-**Authentication**: None
+**Group Route:** `/eskul`
+**Handler:** `ShowAllEskul`
+**Authentication:** None
 
 **Response Format**: JSON
 
 #### `DELETE /eskul/delete/:id`
-**Description**: Handled by `DeleteEskul`
-**Authentication**: None
+**Group Route:** `/eskul`
+**Handler:** `DeleteEskul`
+**Authentication:** Required (JWT)
 
 **Response Format**: JSON
 
-### /IMAGE Routes
+### 📁 Image Routes
+Kumpulan endpoint untuk modul **Image**.
 
 #### `POST /image/add`
-**Description**: Handled by `AddImage`
-**Authentication**: None
+**Group Route:** `/image`
+**Handler:** `AddImage`
+**Authentication:** None
 
 **Response Format**: JSON
 
 #### `DELETE /image/delete/:id`
-**Description**: Handled by `DeleteImage`
-**Authentication**: None
+**Group Route:** `/image`
+**Handler:** `DeleteImage`
+**Authentication:** Required (JWT)
 
 **Response Format**: JSON
 
 #### `GET /image/showAll`
-**Description**: Handled by `ShowAllImages`
-**Authentication**: None
+**Group Route:** `/image`
+**Handler:** `ShowAllImages`
+**Authentication:** None
 
 **Response Format**: JSON
 
 #### `GET /image/show`
-**Description**: Handled by `ShowImagesByCategory`
-**Authentication**: None
+**Group Route:** `/image`
+**Handler:** `ShowImagesByCategory`
+**Authentication:** None
 
 **Response Format**: JSON
 
-### /MADING Routes
+### 📁 Mading Routes
+Kumpulan endpoint untuk modul **Mading**.
 
 #### `POST /mading/create`
-**Description**: Handled by `CreateMading`
-**Authentication**: None
+**Group Route:** `/mading`
+**Handler:** `CreateMading`
+**Authentication:** Required (JWT)
 
 **Request Body Schema** (JSON):
 ```json
@@ -1247,8 +1365,9 @@ Errors are standardized in JSON format with appropriate HTTP status codes (400, 
 **Response Format**: JSON
 
 #### `POST /mading/edit/:id`
-**Description**: Handled by `EditMading`
-**Authentication**: None
+**Group Route:** `/mading`
+**Handler:** `EditMading`
+**Authentication:** Required (JWT)
 
 **Request Body Schema** (JSON):
 ```json
@@ -1263,27 +1382,29 @@ Errors are standardized in JSON format with appropriate HTTP status codes (400, 
 **Response Format**: JSON
 
 #### `GET /mading/show/:id`
-**Description**: Handled by `ShowMading`
-**Authentication**: None
+**Group Route:** `/mading`
+**Handler:** `ShowMading`
+**Authentication:** None
 
 **Response Format**: JSON
 
 #### `GET /mading/showAll`
-**Description**: Handled by `ShowAllMadings`
-**Authentication**: None
+**Group Route:** `/mading`
+**Handler:** `ShowAllMadings`
+**Authentication:** None
 
 **Response Format**: JSON
 
 #### `DELETE /mading/delete/:id`
-**Description**: Handled by `DeleteMading`
-**Authentication**: None
+**Group Route:** `/mading`
+**Handler:** `DeleteMading`
+**Authentication:** Required (JWT)
 
 **Response Format**: JSON
 
-### /MADINGCHANGE-STATUS Routes
-
 #### `PUT /madingchange-status/:id`
-**Description**: Handled by `ChangeStatusMading`
-**Authentication**: None
+**Group Route:** `/mading`
+**Handler:** `ChangeStatusMading`
+**Authentication:** None
 
 **Response Format**: JSON
